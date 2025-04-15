@@ -14,6 +14,37 @@ inputs:
     required: false
     default: 'start'
 
+  ec2-ami-id:
+    description: >-
+      AMI ID to use for the EC2 instance (e.g., ami-1234567890abcdef0)
+      Input required if you use the 'start' mode.
+    required: false
+
+  ec2-min-count:
+    description: Minimum number of EC2 instances to launch
+    required: false
+    default: '1'
+
+  ec2-max-count:
+    description: Maximum number of EC2 instances to launch
+    required: false
+    default: '1'
+
+  ec2-max-wait-time:
+    description: Maximum time in seconds to wait for the EC2 instance to be in "running"
+    required: false
+    default: '300'
+
+  ec2-instance-type:
+    description: EC2 instance type (e.g., t2.micro, t3.micro)
+    required: false
+    default: 't2.micro'
+
+  instance-running-timeout-seconds:
+    description: 'Timeout in seconds to wait for the EC2 instance to reach "running" state.'
+    required: false
+    default: '300'
+
 # Define how the action runs.
 runs:
   using: 'node20'

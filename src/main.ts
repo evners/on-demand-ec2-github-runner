@@ -2,6 +2,7 @@ import { Config } from './config';
 import * as core from '@actions/core';
 import { setOutput } from './utils/set-output';
 import { startEc2Instance } from './aws/start-ec2-instance';
+import { waitEc2InstanceRunning } from './aws/wait-ec2-instance-running';
 
 /**
  * The main function for the action.
@@ -20,6 +21,9 @@ export async function run(): Promise<void> {
 
       // Set the output of the action.
       setOutput(instanceId, label);
+
+      // Wait for the EC2 instance to be in running state.
+      await Promise.all([waitEc2InstanceRunning(config, instanceId)]);
     }
   } catch (error) {
     if (error instanceof Error) {

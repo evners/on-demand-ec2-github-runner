@@ -13,6 +13,7 @@ export class Config {
   readonly amiId?: string;
   readonly minCount: number;
   readonly maxCount: number;
+  readonly maxWaitTime: number; // In seconds
   readonly instanceType: _InstanceType;
   readonly tags: TagSpecification[] = [];
 
@@ -28,6 +29,7 @@ export class Config {
 
     // AWS - EC2.
     this.amiId = core.getInput('ec2-ami-id') || undefined;
+    this.maxWaitTime = parseInt(core.getInput('ec2-max-wait-time') || '300', 10);
     this.instanceType = (core.getInput('ec2-instance-type') || 't2.micro') as _InstanceType;
 
     // Validate inputs.
