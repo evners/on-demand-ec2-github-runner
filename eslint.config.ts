@@ -1,3 +1,5 @@
+import { buffer } from 'stream/consumers';
+
 const eslintPluginJs = require('@eslint/js');
 const typescriptPlugin = require('@typescript-eslint/eslint-plugin');
 const typescriptParser = require('@typescript-eslint/parser');
@@ -15,6 +17,8 @@ module.exports = [
       },
       globals: {
         console: true,
+        require: 'readonly',
+        Buffer: 'readonly',
       },
     },
     plugins: {
