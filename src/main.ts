@@ -4,6 +4,7 @@ import { setOutput } from './utils/set-output';
 import { startEc2Instance } from './aws/start-ec2-instance';
 import { waitEc2InstanceRunning } from './aws/wait-ec2-instance-running';
 import { getGitHubRegistrationToken } from './github/get-registration-token';
+import { waitGitHubRunnerRegistered } from './github/wait-github-runner-registered';
 
 /**
  * The main function for the action.
@@ -26,8 +27,8 @@ export async function run(): Promise<void> {
       // Set the output of the action.
       setOutput(instanceId, label);
 
-      // Wait for the EC2 instance to be in running state.
-      await Promise.all([waitEc2InstanceRunning(config, instanceId)]);
+      // Wait for the EC2 instance to be running and the GitHub runner to be registered.
+      await Promise.all([waitEc2InstanceRunning(config, instanceId), waitGitHubRunnerRegistered(config, label)]);
     }
   } catch (error) {
     if (error instanceof Error) {

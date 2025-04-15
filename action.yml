@@ -44,6 +44,20 @@ inputs:
     description: GitHub Token with the 'repo' scope assigned.
     required: true
 
+  runner-timeout-minutes:
+    description: 'Max minutes to wait for the GitHub runner to register.'
+    required: false
+    default: '5'
+
+  runner-retry-seconds:
+    description: 'Interval in seconds between checking the runner status.'
+    required: false
+    default: '5'
+
+  runner-quiet-seconds:
+    description: 'Initial wait time (in seconds) before starting to check runner status.'
+    required: false
+    default: '30'
 # Define how the action runs.
 runs:
   using: 'node20'

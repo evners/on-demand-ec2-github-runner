@@ -19,6 +19,9 @@ export class Config {
 
   // GitHub - Runner.
   readonly githubToken: string;
+  readonly timeoutMinutes: number;
+  readonly retryIntervalSeconds: number;
+  readonly quietPeriodSeconds: number;
 
   /**
    * Constructor for the Config class.
@@ -37,6 +40,9 @@ export class Config {
 
     // GitHub - Runner.
     this.githubToken = core.getInput('github-token');
+    this.timeoutMinutes = parseInt(core.getInput('runner-timeout-minutes') || '5', 10);
+    this.retryIntervalSeconds = parseInt(core.getInput('runner-retry-seconds') || '5', 10);
+    this.quietPeriodSeconds = parseInt(core.getInput('runner-quiet-seconds') || '30', 10);
 
     // Validate inputs.
     this.validate();
