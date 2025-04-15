@@ -1,16 +1,13 @@
-import { Config } from '../config';
 import { logger } from '../utils/logger';
 import { EC2Client, TerminateInstancesCommand } from '@aws-sdk/client-ec2';
 
 /**
  * Stops an EC2 instance using the specified instance ID.
  *
- * @param config - The action configuration.
+ * @param instanceId The ID of the EC2 instance to terminate.
  * @returns A promise that resolves when the instance is terminated.
  */
-export async function terminateEc2Instance(config: Config): Promise<void> {
-  // Destructure the config object to get the instanceId.
-  const { instanceId } = config;
+export async function terminateEc2Instance(instanceId: string): Promise<void> {
   // Create an EC2 client.
   const ec2Client: EC2Client = new EC2Client();
 

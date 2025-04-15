@@ -6,6 +6,7 @@ import { terminateEc2Instance } from './aws/terminate-ec2-instance';
 import { waitEc2InstanceRunning } from './aws/wait-ec2-instance-running';
 import { getGitHubRegistrationToken } from './github/get-registration-token';
 import { waitGitHubRunnerRegistered } from './github/wait-github-runner-registered';
+import { unregisterGitHubRunner } from './github/unregister-github-runner';
 
 /**
  * The main function for the action.
@@ -31,8 +32,11 @@ export async function run(): Promise<void> {
       // Wait for the EC2 instance to be running and the GitHub runner to be registered.
       await Promise.all([waitEc2InstanceRunning(config, instanceId), waitGitHubRunnerRegistered(config, label)]);
     } else if (config.mode === 'stop') {
-      // Terminate the EC2 instance,
-      await Promise.all([terminateEc2Instance(config)]);
+      // Destructure the config to get the GitHub token and label.
+      const { instanceId, githubToken, label } = config;
+
+      // Terminate the EC2 instance and unregister the GitHub runner.
+      await Promise.all([terminateEc2Instance(instanceId!), unregisterGitHubRunner(githubToken!, label!)]);
     }
   } catch (error) {
     if (error instanceof Error) {

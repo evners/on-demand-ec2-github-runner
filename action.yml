@@ -14,51 +14,67 @@ inputs:
     required: false
     default: 'start'
 
+  label:
+    description: >-
+      Label assigned to the GitHub runner, used to remove the runner from GitHub.
+      Required if you use the 'stop' mode.
+    required: false
+
   ec2-ami-id:
     description: >-
       AMI ID to use for the EC2 instance (e.g., ami-1234567890abcdef0)
-      Input required if you use the 'start' mode.
-    required: false
+      Required if you use the 'start' mode.
+    required: true
 
   ec2-min-count:
-    description: Minimum number of EC2 instances to launch
+    description: >-
+      Minimum number of EC2 instances to launch
+      Only used if you use the 'start' mode.
     required: false
     default: '1'
 
   ec2-max-count:
-    description: Maximum number of EC2 instances to launch
+    description: >-
+      Maximum number of EC2 instances to launch
+      Only used if you use the 'start' mode.
     required: false
     default: '1'
 
   ec2-max-wait-time:
-    description: Maximum time in seconds to wait for the EC2 instance to be in "running"
+    description: >-
+      Maximum time in seconds to wait for the EC2 instance to be in "running"
+      Only used if you use the 'start' mode.
     required: false
     default: '300'
 
   ec2-instance-type:
     description: >-
       EC2 instance type (e.g., t2.micro, t3.micro)
-      Input required if you use the 'start' mode.
+      Only used if you use the 'start' mode.
     required: false
     default: 't2.micro'
 
   ec2-instance-id:
     description: >-
       EC2 Instance Id of the created runner, it is used to terminate the EC2 instance when the runner is not needed anymore.
-      Input required if you use the 'stop' mode.
-    required: false
+      Required if you use the 'stop' mode.
+    required: true
 
   github-token:
     description: GitHub Token with the 'repo' scope assigned.
     required: true
 
   runner-timeout-minutes:
-    description: 'Max minutes to wait for the GitHub runner to register.'
+    description: >-
+      Max minutes to wait for the GitHub runner to register.
+      Only used if you use the 'start' mode.
     required: false
     default: '5'
 
   runner-retry-seconds:
-    description: 'Interval in seconds between checking the runner status.'
+    description: >-
+      Interval in seconds between checking the runner status.
+      Only used if you use the 'start' mode.
     required: false
     default: '5'
 

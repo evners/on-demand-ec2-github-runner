@@ -42,6 +42,7 @@ export class Config {
     this.instanceType = (core.getInput('ec2-instance-type') || 't2.micro') as _InstanceType;
 
     // GitHub - Runner.
+    this.label = core.getInput('label') || undefined;
     this.githubToken = core.getInput('github-token');
     this.timeoutMinutes = parseInt(core.getInput('runner-timeout-minutes') || '5', 10);
     this.retryIntervalSeconds = parseInt(core.getInput('runner-retry-seconds') || '5', 10);
@@ -73,6 +74,11 @@ export class Config {
     // Validate instanceId.
     if (this.mode === 'stop' && !this.instanceId) {
       throw new Error('Input "ec2-instance-id" is required when mode is "stop".');
+    }
+
+    // Validate label.
+    if (this.mode === 'stop' && !this.label) {
+      throw new Error('Input "label" is required when mode is "stop".');
     }
   }
 }
