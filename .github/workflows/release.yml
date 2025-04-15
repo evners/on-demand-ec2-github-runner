@@ -16,15 +16,26 @@ jobs:
 
     # Rquire the following permissions for the job.
     permissions:
-      contents: write
       issues: write
+      contents: write
       pull-requests: write
 
     # Define the steps that will be executed in this job.
     steps:
+      # Step 0: Create a GitHub App token.
+      - name: GitHub App Token
+        id: app
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.EVNERS_APP_ID }}
+          private-key: ${{ secrets.EVNERS_PRIVATE_KEY }}
+
       # Step 1: Checkout the code.
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.app.outputs.token }}
 
       # Step 2: Set up Node.js environment.
       - name: Setup Node.js
@@ -47,5 +58,6 @@ jobs:
       # Step 6: Execute Semantic Release.
       - name: Semantic Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+        run: |
+          pnpm semantic-release
