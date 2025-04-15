@@ -7,9 +7,14 @@ on: workflow_dispatch
 
 # Define the jobs that will run when the workflow is triggered.
 jobs:
-  start-ec2:
+  start-runner:
     # This job runs on the latest version of Ubuntu.
     runs-on: ubuntu-latest
+    # Define the outputs for this job.
+    outputs:
+      label: ${{ steps.start-ec2.outputs.label }}
+      ec2-instance-id: ${{ steps.start-ec2.outputs.ec2-instance-id }}
+
     steps:
       # Step 1: Checkout.
       - name: Checkout code
@@ -51,3 +56,64 @@ jobs:
         with:
           ec2-ami-id: ami-0df368112825f8d8f
           github-token: ${{ steps.github-app.outputs.token }}
+
+  do-the-job:
+    name: Run your workflow
+    needs: start-runner
+    runs-on: ${{ needs.start-runner.outputs.label }}
+    steps:
+      - name: Say Hello
+        run: echo "Hello from GitHub Actions!"
+
+  stop-runner:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [start-runner, do-the-job]
+    steps:
+      # Step 1: Checkout the code.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js environment.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Step 3: Install pnpm.
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Step 4: Install dependencies.
+      - name: Install dependencies
+        run: pnpm install
+
+      # Step 5: Build the action.
+      - name: Build the action
+        run: pnpm build
+
+      # Step 6: Configure AWS credentials.
+      - name: AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: 'eu-west-1'
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Step 7: Create a GitHub App token.
+      - name: GitHub App
+        id: github-app
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.EVNERS_BOT_APP_ID }}
+          private-key: ${{ secrets.EVNERS_BOT_PRIVATE_KEY }}
+
+      # Step 8: Use the action to stop the EC2 instance.
+      - name: Test on-demand-ec2-runner
+        uses: ./
+        with:
+          mode: 'stop'
+          label: ${{ needs.start-runner.outputs.label }}
+          github-token: ${{ steps.github-app.outputs.token }}
+          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}

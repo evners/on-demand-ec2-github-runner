@@ -36,9 +36,17 @@ inputs:
     default: '300'
 
   ec2-instance-type:
-    description: EC2 instance type (e.g., t2.micro, t3.micro)
+    description: >-
+      EC2 instance type (e.g., t2.micro, t3.micro)
+      Input required if you use the 'start' mode.
     required: false
     default: 't2.micro'
+
+  ec2-instance-id:
+    description: >-
+      EC2 Instance Id of the created runner, it is used to terminate the EC2 instance when the runner is not needed anymore.
+      Input required if you use the 'stop' mode.
+    required: false
 
   github-token:
     description: GitHub Token with the 'repo' scope assigned.
@@ -58,6 +66,16 @@ inputs:
     description: 'Initial wait time (in seconds) before starting to check runner status.'
     required: false
     default: '30'
+
+outputs:
+  label:
+    description: >-
+      Name of the github runner, is used in two cases:
+      - To use as input of 'runs-on'.
+      - To remove the runner from GitHub.
+  ec2-instance-id:
+    description: EC2 Instance Id, used to terminate the EC2 instance.
+
 # Define how the action runs.
 runs:
   using: 'node20'

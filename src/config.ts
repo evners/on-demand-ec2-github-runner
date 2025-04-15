@@ -16,6 +16,8 @@ export class Config {
   readonly maxWaitTime: number; // In seconds
   readonly instanceType: _InstanceType;
   readonly tags: TagSpecification[] = [];
+  readonly instanceId?: string;
+  readonly label?: string;
 
   // GitHub - Runner.
   readonly githubToken: string;
@@ -36,6 +38,7 @@ export class Config {
     // AWS - EC2.
     this.amiId = core.getInput('ec2-ami-id') || undefined;
     this.maxWaitTime = parseInt(core.getInput('ec2-max-wait-time') || '300', 10);
+    this.instanceId = core.getInput('ec2-instance-id') || undefined;
     this.instanceType = (core.getInput('ec2-instance-type') || 't2.micro') as _InstanceType;
 
     // GitHub - Runner.
@@ -65,6 +68,11 @@ export class Config {
     // Validate github token.
     if (!this.githubToken) {
       throw new Error('Input "github-token" is required.');
+    }
+
+    // Validate instanceId.
+    if (this.mode === 'stop' && !this.instanceId) {
+      throw new Error('Input "ec2-instance-id" is required when mode is "stop".');
     }
   }
 }

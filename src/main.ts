@@ -2,6 +2,7 @@ import { Config } from './config';
 import * as core from '@actions/core';
 import { setOutput } from './utils/set-output';
 import { startEc2Instance } from './aws/start-ec2-instance';
+import { terminateEc2Instance } from './aws/terminate-ec2-instance';
 import { waitEc2InstanceRunning } from './aws/wait-ec2-instance-running';
 import { getGitHubRegistrationToken } from './github/get-registration-token';
 import { waitGitHubRunnerRegistered } from './github/wait-github-runner-registered';
@@ -25,10 +26,13 @@ export async function run(): Promise<void> {
       const { instanceId, label } = await startEc2Instance(config, token);
 
       // Set the output of the action.
-      setOutput(instanceId, label);
+      setOutput(label, instanceId);
 
       // Wait for the EC2 instance to be running and the GitHub runner to be registered.
       await Promise.all([waitEc2InstanceRunning(config, instanceId), waitGitHubRunnerRegistered(config, label)]);
+    } else if (config.mode === 'stop') {
+      // Terminate the EC2 instance,
+      await Promise.all([terminateEc2Instance(config)]);
     }
   } catch (error) {
     if (error instanceof Error) {
