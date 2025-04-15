@@ -3,6 +3,7 @@ import * as core from '@actions/core';
 import { setOutput } from './utils/set-output';
 import { startEc2Instance } from './aws/start-ec2-instance';
 import { waitEc2InstanceRunning } from './aws/wait-ec2-instance-running';
+import { getGitHubRegistrationToken } from './github/get-registration-token';
 
 /**
  * The main function for the action.
@@ -16,8 +17,11 @@ export async function run(): Promise<void> {
 
     // Decider for the action mode.
     if (config.mode === 'start') {
+      // Create github registration token and
+      const token = await getGitHubRegistrationToken(config);
+
       // Start the EC2 instance.
-      const { instanceId, label } = await startEc2Instance(config);
+      const { instanceId, label } = await startEc2Instance(config, token);
 
       // Set the output of the action.
       setOutput(instanceId, label);

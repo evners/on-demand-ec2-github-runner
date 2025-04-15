@@ -40,10 +40,9 @@ inputs:
     required: false
     default: 't2.micro'
 
-  instance-running-timeout-seconds:
-    description: 'Timeout in seconds to wait for the EC2 instance to reach "running" state.'
-    required: false
-    default: '300'
+  github-token:
+    description: GitHub Token with the 'repo' scope assigned.
+    required: true
 
 # Define how the action runs.
 runs:

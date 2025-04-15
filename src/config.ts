@@ -17,6 +17,9 @@ export class Config {
   readonly instanceType: _InstanceType;
   readonly tags: TagSpecification[] = [];
 
+  // GitHub - Runner.
+  readonly githubToken: string;
+
   /**
    * Constructor for the Config class.
    * @throws Will throw an error if the input parameters are invalid.
@@ -31,6 +34,9 @@ export class Config {
     this.amiId = core.getInput('ec2-ami-id') || undefined;
     this.maxWaitTime = parseInt(core.getInput('ec2-max-wait-time') || '300', 10);
     this.instanceType = (core.getInput('ec2-instance-type') || 't2.micro') as _InstanceType;
+
+    // GitHub - Runner.
+    this.githubToken = core.getInput('github-token');
 
     // Validate inputs.
     this.validate();
@@ -48,6 +54,11 @@ export class Config {
     // Validate the AMI ID.
     if (this.mode === 'start' && !this.amiId) {
       throw new Error('Input "ec2-ami-id" is required when mode is "start".');
+    }
+
+    // Validate github token.
+    if (!this.githubToken) {
+      throw new Error('Input "github-token" is required.');
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Config } from '../config';
+import { createUserData } from './create-user-data';
 import { generateLabel } from '../utils/generate-label';
 import { EC2Client, RunInstancesCommand, TagSpecification } from '@aws-sdk/client-ec2';
 
@@ -17,11 +18,13 @@ export type Ec2InstanceData = {
  * Starts an EC2 instance based on the provided configuration.
  *
  * @param config - The action configuration.
+ * @param token - The GitHub registration token.
  * @returns Object containing the instance ID and runner label.
  */
-export async function startEc2Instance(config: Config): Promise<Ec2InstanceData> {
+export async function startEc2Instance(config: Config, token: string): Promise<Ec2InstanceData> {
   // Create a label, user data, and EC2 client.
   const label: string = generateLabel();
+  const userData: string = createUserData(label, token);
   const ec2Client: EC2Client = new EC2Client();
 
   // Create the tag specifications for the instance.
@@ -48,6 +51,7 @@ export async function startEc2Instance(config: Config): Promise<Ec2InstanceData>
     InstanceType: config.instanceType,
     MinCount: config.minCount,
     MaxCount: config.maxCount,
+    UserData: userData,
     TagSpecifications: tagSpecifications,
   });
 

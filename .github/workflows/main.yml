@@ -36,9 +36,18 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      # Step 6: Use the action.
+      # Step 6: Create a GitHub App token.
+      - name: GitHub App
+        id: github-app
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.EVNERS_BOT_APP_ID }}
+          private-key: ${{ secrets.EVNERS_BOT_PRIVATE_KEY }}
+
+      # Step 7: Use the action.
       - name: On-Demand EC2
         id: start-ec2
         uses: ./
         with:
           ec2-ami-id: ami-0df368112825f8d8f
+          github-token: ${{ steps.github-app.outputs.token }}
