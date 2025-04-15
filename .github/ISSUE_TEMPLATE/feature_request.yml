@@ -1,0 +1,31 @@
+name: Feature Request
+description: Suggest an enhancement or improvement for the project
+labels: [enhancement]
+type: 'Feature'
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to Solve
+      description: What problem does this feature aim to solve? What is the use case?
+      placeholder: 'I would like to allow users to specify a configuration file to customize the action behavior...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed Solution
+      description: How do you suggest implementing this feature?
+      placeholder: 'Introduce an optional input parameter to specify a configuration file path...'
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or mockups that might help explain your request.
+      placeholder: 'Example workflows, UI screenshots, error messages, or related ideas...'
+    validations:
+      required: false

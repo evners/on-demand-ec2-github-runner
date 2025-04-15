@@ -1,0 +1,73 @@
+repository:
+  # See https://developer.github.com/v3/repos/#edit for all available settings.
+
+  # The name of the repository.
+  # Changing this will rename the repository.
+  # name: hello-world-javascript-action
+
+  # A short description of the repository that will show up on GitHub.
+  # description: A hello world javascript action
+
+  # A comma-separated list of topics to set on the repository.
+  # topics: hello-world, composite-action, github-actions, github-actions-template, template
+
+  # Either `true` to make the repository private, or `false` to make it public.
+  # private: false
+
+  # Either `true` to enable issues for this repository, `false` to disable them.
+  has_issues: true
+
+  # Either `true` to enable projects for this repository, or `false` to disable them.
+  # If projects are disabled for the organization, passing `true` will cause an API error.
+  has_projects: true
+
+  # Either `true` to enable the wiki for this repository, `false` to disable it.
+  has_wiki: false
+
+  # Either `true` to enable downloads for this repository, `false` to disable them.
+  has_downloads: false
+
+  # Updates the default branch for this repository.
+  default_branch: main
+
+  # Either `true` to allow squash-merging pull requests, or `false` to prevent
+  # squash-merging.
+  allow_squash_merge: true
+
+  # Either `true` to allow merging pull requests with a merge commit, or `false`
+  # to prevent merging pull requests with merge commits.
+  allow_merge_commit: false
+
+  # Either `true` to allow rebase-merging pull requests, or `false` to prevent
+  # rebase-merging.
+  allow_rebase_merge: true
+
+  # Either `true` to enable automatic deletion of branches on merge, or `false` to disable
+  delete_branch_on_merge: true
+
+# Labels: define labels for Issues and Pull Requests.
+labels:
+  # This label is used to mark issues that are bug reports.
+  - name: bug
+    color: 'd73a4a'
+    description: "Something isn't working"
+
+  # This label is used to mark issues that are new features.
+  - name: feature
+    color: '0e8a16'
+    description: 'New feature or request'
+
+  # This label is used to mark issues that are enhancements to existing features.
+  - name: enhancement
+    color: 'FBCA04'
+    description: 'Improvement to an existing feature'
+
+  # This label is used to mark issues that are suitable for first-time contributors.
+  - name: good first issue
+    color: '7057ff'
+    description: 'Good first issue for new contributors'
+
+  # This label is used to mark issues that are related to documentation.
+  - name: documentation
+    color: '0075ca'
+    description: 'Changes or improvements to documentation'
