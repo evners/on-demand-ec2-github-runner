@@ -7,8 +7,7 @@ on: workflow_dispatch
 
 # Define the jobs that will run when the workflow is triggered.
 jobs:
-  hello-world:
-    name: A job to say hello
+  start-ec2:
     # This job runs on the latest version of Ubuntu.
     runs-on: ubuntu-latest
     steps:
@@ -28,13 +27,18 @@ jobs:
       - name: Build the action
         run: pnpm build
 
-      # Step 5: Use the action.
-      - name: Hello world action
-        id: hello
+      # Step 5: Configure AWS credentials.
+      - name: AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: 'eu-west-1'
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Step 6: Use the action.
+      - name: On-Demand EC2
+        id: start-ec2
         uses: ./
         with:
-          who-to-greet: 'Mona the Octocat'
-
-      # Step 6: Get the output time.
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          ec2-ami-id: ami-0df368112825f8d8f

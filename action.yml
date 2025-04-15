@@ -1,13 +1,20 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'On-Demand EC2 Runner'
+description: 'Launch an EC2 instance on-demand to use as a GitHub Actions runner.'
+
+# Provides metadata about the action.
+author: 'evners'
+branding:
+  icon: 'server'
+  color: 'blue'
+
+# Defines the inputs for the action.
 inputs:
-  who-to-greet: # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  mode:
+    description: 'Action mode: "start" to launch an instance, "stop" to terminate one.'
+    required: false
+    default: 'start'
+
+# Define how the action runs.
 runs:
   using: 'node20'
   main: 'dist/index.js'

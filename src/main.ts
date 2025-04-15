@@ -1,5 +1,7 @@
+import { Config } from './config';
 import * as core from '@actions/core';
-import * as github from '@actions/github';
+import { setOutput } from './utils/set-output';
+import { startEc2Instance } from './aws/start-ec2-instance';
 
 /**
  * The main function for the action.
@@ -8,14 +10,17 @@ import * as github from '@actions/github';
  */
 export async function run(): Promise<void> {
   try {
-    const nameToGreet = core.getInput('who-to-greet');
-    console.log(`Hello ${nameToGreet}!`);
+    // Read inputs and validate configuration.
+    const config = new Config();
 
-    const time = new Date().toTimeString();
-    core.setOutput('time', time);
+    // Decider for the action mode.
+    if (config.mode === 'start') {
+      // Start the EC2 instance.
+      const { instanceId, label } = await startEc2Instance(config);
 
-    const payload = JSON.stringify(github.context.payload, undefined, 2);
-    console.log(`The event payload: ${payload}`);
+      // Set the output of the action.
+      setOutput(instanceId, label);
+    }
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message);
