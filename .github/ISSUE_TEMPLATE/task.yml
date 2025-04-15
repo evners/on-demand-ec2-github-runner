@@ -1,0 +1,25 @@
+name: Task
+description: Plan a general improvement, refactor, documentation update, or maintenance task
+labels: [task]
+type: 'Task'
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      description: What needs to be done? Please describe the goal and main steps.
+      placeholder: |
+        - Clean up utility functions
+        - Improve error handling
+        - Add unit tests for validation
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any additional information, context, or references.
+      placeholder: 'Links to discussions, related issues, or diagrams...'
+    validations:
+      required: false

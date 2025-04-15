@@ -1,0 +1,43 @@
+name: Bug Report
+description: Report a problem with the project
+labels: [bug]
+type: 'Bug'
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe what the bug is and what you expected to happen.
+      placeholder: 'When executing the action, it fails with error XYZ...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Configure input X
+        2. Run the workflow
+        3. See error
+    validations:
+      required: true
+
+  - type: input
+    id: project-version
+    attributes:
+      label: Project Version
+      description: Which version of the action or project are you using?
+      placeholder: e.g. v1.0.2
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs or Screenshots
+      description: Paste any logs, stack traces, or screenshots that can help us debug.
+      render: shell
+    validations:
+      required: false

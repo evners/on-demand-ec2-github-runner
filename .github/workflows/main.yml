@@ -1,0 +1,40 @@
+# Workflow to test the custom GitHub Action.
+name: main
+
+# Allow the workflow to be triggered manually.
+# This is useful for testing the action.
+on: workflow_dispatch
+
+# Define the jobs that will run when the workflow is triggered.
+jobs:
+  hello-world:
+    name: A job to say hello
+    # This job runs on the latest version of Ubuntu.
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Install pnpm.
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Step 3: Install dependencies.
+      - name: Install dependencies
+        run: pnpm install
+
+      # Step 4: Build the action.
+      - name: Build the action
+        run: pnpm build
+
+      # Step 5: Use the action.
+      - name: Hello world action
+        id: hello
+        uses: ./
+        with:
+          who-to-greet: 'Mona the Octocat'
+
+      # Step 6: Get the output time.
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
