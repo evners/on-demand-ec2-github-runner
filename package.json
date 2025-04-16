@@ -1,5 +1,5 @@
 {
-  "name": "on-demand-ec2-runner",
+  "name": "on-demand-ec2-github-runner",
   "version": "0.0.1",
   "description": "GitHub Action to launch and terminate on-demand EC2 instances as self-hosted runners, improving performance and cost-efficiency in CI/CD pipelines.",
   "main": "index.js",

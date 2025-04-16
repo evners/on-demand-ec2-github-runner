@@ -1,4 +1,4 @@
-name: 'On-Demand EC2 Runner'
+name: 'On-Demand EC2 GitHub Runner'
 description: 'Launch an EC2 instance on-demand to use as a GitHub Actions runner.'
 
 # Provides metadata about the action.
