@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/evners/on-demand-ec2-github-runner/compare/v1.0.0...v1.0.1) (2025-04-16)
+
+
+### Bug Fixes
+
+* set ec2 instance id and ec2 ami id as non required ([85e5ee9](https://github.com/evners/on-demand-ec2-github-runner/commit/85e5ee99a7c6313df63d99631599d4b061f5f9f7))
+
 # 1.0.0 (2025-04-16)
 
 
