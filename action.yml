@@ -24,7 +24,7 @@ inputs:
     description: >-
       AMI ID to use for the EC2 instance (e.g., ami-1234567890abcdef0)
       Required if you use the 'start' mode.
-    required: true
+    required: false
 
   ec2-min-count:
     description: >-
@@ -58,7 +58,7 @@ inputs:
     description: >-
       EC2 Instance Id of the created runner, it is used to terminate the EC2 instance when the runner is not needed anymore.
       Required if you use the 'stop' mode.
-    required: true
+    required: false
 
   github-token:
     description: GitHub Token with the 'repo' scope assigned.
