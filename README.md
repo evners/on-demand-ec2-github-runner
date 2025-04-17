@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/evners/on-demand-ec2-github-runner)](https://github.com/evners/on-demand-ec2-github-runner/releases)
 [![Build Status](https://github.com/evners/on-demand-ec2-github-runner/actions/workflows/release.yml/badge.svg)](https://github.com/evners/on-demand-ec2-github-runner/actions)
 [![License](https://img.shields.io/github/license/evners/on-demand-ec2-github-runner)](LICENSE)
-[![Marketplace](https://img.shields.io/badge/marketplace-on--demand--ec2--runner-blue)](https://github.com/marketplace/actions/on-demand-ec2-github-runner)
+[![Marketplace](https://img.shields.io/badge/marketplace-on--demand--ec2--github--runner-blue)](https://github.com/marketplace/actions/on-demand-ec2-github-runner)
 
 This action makes it easy for **GitHub Actions** users to dynamically **start**, **stop**, and manage **EC2 instances** as **self-hosted runners**, ensuring faster, more flexible, and cost-efficient workflows.
 
