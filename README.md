@@ -106,10 +106,10 @@ stop-runner:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-    # Use the 'evners/on-demand-ec2-runner@v1' action in 'stop' mode to terminate the EC2 instance
+    # Use the 'evners/on-demand-ec2-github-runner@v1' action in 'stop' mode to terminate the EC2 instance
     # and automatically remove the self-hosted runner from GitHub.
     - name: Stop Runner
-      uses: evners/on-demand-ec2-runner@v1
+      uses: evners/on-demand-ec2-github-runner@v1
       with:
         mode: 'stop'
         label: ${{needs.setup-runner.outputs.label }}
