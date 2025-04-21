@@ -71,3 +71,13 @@ labels:
   - name: documentation
     color: '0075ca'
     description: 'Changes or improvements to documentation'
+
+  # This label is used to mark issues that are related to dependencies.
+  - name: dependencies
+    color: 'd4c5f9'
+    description: 'Changes or improvements to dependencies'
+
+  # This label is used to mark issues that are related to the user interface.
+  - name: security
+    color: 'e4b400'
+    description: 'Security issue or vulnerability'
