@@ -46,16 +46,17 @@ jobs:
         id: github-app
         uses: actions/create-github-app-token@v2
         with:
-          app-id: ${{ secrets.EVNERS_BOT_APP_ID }}
-          private-key: ${{ secrets.EVNERS_BOT_PRIVATE_KEY }}
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
 
       # Step 7: Use the action.
       - name: On-Demand EC2
         id: start-ec2
         uses: ./
         with:
-          ec2-ami-id: ami-0df368112825f8d8f
+          ec2-ami-id: 'ami-0df368112825f8d8f'
           github-token: ${{ steps.github-app.outputs.token }}
+          security-group-id: 'sg-08b7a08cac6c85ea4'
 
   do-the-job:
     name: Run your workflow
@@ -106,8 +107,8 @@ jobs:
         id: github-app
         uses: actions/create-github-app-token@v2
         with:
-          app-id: ${{ secrets.EVNERS_BOT_APP_ID }}
-          private-key: ${{ secrets.EVNERS_BOT_PRIVATE_KEY }}
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
 
       # Step 8: Use the action to stop the EC2 instance.
       - name: Test on-demand-ec2-runner

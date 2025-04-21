@@ -60,6 +60,12 @@ inputs:
       Required if you use the 'stop' mode.
     required: false
 
+  security-group-id:
+    description: >-
+      Security group ID to use for the EC2 instance (e.g., sg-1234567890abcdef0)
+      Only used if you use the 'start' mode.
+    required: false
+
   github-token:
     description: GitHub Token with the 'repo' scope assigned.
     required: true

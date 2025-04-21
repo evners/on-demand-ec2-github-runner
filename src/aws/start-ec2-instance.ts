@@ -53,6 +53,7 @@ export async function startEc2Instance(config: Config, token: string): Promise<E
     MaxCount: config.maxCount,
     UserData: userData,
     TagSpecifications: tagSpecifications,
+    SecurityGroupIds: config.securityGroupId ? [config.securityGroupId] : undefined,
   });
 
   // Extract the instance ID from the response.
