@@ -66,6 +66,12 @@ inputs:
       Only used if you use the 'start' mode.
     required: false
 
+  subnet-id:
+    description: >-
+      Subnet ID to use for the EC2 instance (e.g., subnet-1234567890abcdef0)
+      Only used if you use the 'start' mode.
+    required: false
+
   github-token:
     description: GitHub Token with the 'repo' scope assigned.
     required: true

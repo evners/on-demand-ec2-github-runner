@@ -18,6 +18,7 @@ export class Config {
   readonly tags: TagSpecification[] = [];
   readonly instanceId?: string;
   readonly label?: string;
+  readonly subnetId?: string;
   readonly securityGroupId?: string;
 
   // GitHub - Runner.
@@ -41,6 +42,7 @@ export class Config {
     this.maxWaitTime = parseInt(core.getInput('ec2-max-wait-time') || '300', 10);
     this.instanceId = core.getInput('ec2-instance-id') || undefined;
     this.instanceType = (core.getInput('ec2-instance-type') || 't2.micro') as _InstanceType;
+    this.subnetId = core.getInput('subnet-id') || undefined;
     this.securityGroupId = core.getInput('security-group-id') || undefined;
 
     // GitHub - Runner.
