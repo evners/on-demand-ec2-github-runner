@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/evners/on-demand-ec2-github-runner/compare/v1.0.1...v1.1.0) (2025-04-21)
+
+
+### Features
+
+* add support for configuring subnet id ([e36739b](https://github.com/evners/on-demand-ec2-github-runner/commit/e36739bf5d9c2b576617b2843c4e556b8e0e7db1)), closes [#9](https://github.com/evners/on-demand-ec2-github-runner/issues/9)
+* allow to specify security group id ([89f85d5](https://github.com/evners/on-demand-ec2-github-runner/commit/89f85d524066fd7ace069802d0d64334f7340be5)), closes [#10](https://github.com/evners/on-demand-ec2-github-runner/issues/10)
+
 ## [1.0.1](https://github.com/evners/on-demand-ec2-github-runner/compare/v1.0.0...v1.0.1) (2025-04-16)
 
 

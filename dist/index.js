@@ -27358,6 +27358,8 @@ var Config = /** @class */ (function () {
         this.maxWaitTime = parseInt(coreExports.getInput('ec2-max-wait-time') || '300', 10);
         this.instanceId = coreExports.getInput('ec2-instance-id') || undefined;
         this.instanceType = (coreExports.getInput('ec2-instance-type') || 't2.micro');
+        this.subnetId = coreExports.getInput('subnet-id') || undefined;
+        this.securityGroupId = coreExports.getInput('security-group-id') || undefined;
         // GitHub - Runner.
         this.label = coreExports.getInput('label') || undefined;
         this.githubToken = coreExports.getInput('github-token');
@@ -42060,6 +42062,8 @@ function startEc2Instance(config, token) {
                         MaxCount: config.maxCount,
                         UserData: userData,
                         TagSpecifications: tagSpecifications,
+                        SubnetId: config.subnetId,
+                        SecurityGroupIds: config.securityGroupId ? [config.securityGroupId] : undefined,
                     });
                     return [4 /*yield*/, ec2Client.send(runInstancesCommand)];
                 case 1:
