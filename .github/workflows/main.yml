@@ -54,9 +54,10 @@ jobs:
         id: start-ec2
         uses: ./
         with:
-          ec2-ami-id: 'ami-0df368112825f8d8f'
+          ec2-ami-id: ${{ secrets.EC2_AMI_ID }}
           github-token: ${{ steps.github-app.outputs.token }}
-          security-group-id: 'sg-08b7a08cac6c85ea4'
+          subnet-id: ${{ secrets.EC2_SUBNET_ID }}
+          security-group-id: ${{ secrets.EC2_SECURITY_GROUP_ID }}
 
   do-the-job:
     name: Run your workflow
