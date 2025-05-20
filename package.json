@@ -24,7 +24,7 @@
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0",
+    "@actions/github": "^6.0.1",
     "@aws-sdk/client-ec2": "^3.813.0",
     "@octokit/rest": "^21.1.1",
     "tslib": "^2.8.1"
